@@ -7,6 +7,7 @@ let sliders;
 let values;
 
 let control;
+let stuck;
 
 let movementSelect;
 let movementType = 1;
@@ -40,6 +41,10 @@ window.onload = () => {
   document
     .querySelector("#control")
     .addEventListener("change", () => (control = !control));
+
+document
+.querySelector("#stuck")
+.addEventListener("change", () => (stuck =  !stuck))
 
   movementSelect = document.querySelector("#movement");
   movementSelect.addEventListener(
@@ -90,16 +95,32 @@ function animate() {
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, 500, 500);
 
+  // * velur endapunkt fyrir fyrsta segment útfrá user vali
   control ? lines[0].point(mouse) : lines[0].point(getMathCoord());
-
   lines[0].calcB();
-  lines[0].show("#f00", 5);
 
+  // * hérna er follow fyrir rest af segments
   for (let i = 1; i < lines.length; i++) {
     lines[i].point(lines[i - 1].a);
     lines[i].calcB();
-    lines[i].show();
   }
+
+
+  // * hér er svo farið afturábak yfir fylkið og fest ákveðnum punkti
+  if (stuck) {
+	  lines[lines.length - 1].a = Victor(0, 250);
+	  lines[lines.length - 1].calcB();
+	  for (let i = lines.length-2; i >= 0; i--){
+		lines[i].a = lines[i+1].b;
+		lines[i].calcB()
+	  }
+  }
+
+
+  // * eftir alla útreikninga eru öll segments sýnd
+  lines.forEach((l) => {
+    l.show();
+  });
 
   window.requestAnimationFrame(animate);
 }
