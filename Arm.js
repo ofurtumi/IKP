@@ -7,7 +7,6 @@ export class Arm {
 		this.num = num_;
 		this.len = len_;
 		this.ctx = ctx_;
-        this.counter = 0;
 		this.stuck = false;
 		this.xPos = 100;
 		this.yPos = 100;

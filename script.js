@@ -6,6 +6,8 @@ import { Arm } from './Arm.js'
 let canvas;
 let ctx;
 
+let counter = 0;
+
 let arms = new Array();
 
 let mouse = { x: 0, y: 0 };
@@ -29,11 +31,12 @@ function animate() {
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   arms.forEach((arm) => {
-	arm.animated ? arm.follow(getAnimationCoord(arm.animStyle,arm.counter++, (canvas.width/2))) : arm.follow(mouse);
+	arm.animated ? arm.follow(getAnimationCoord(arm.animStyle, counter, (canvas.width/2))) : arm.follow(mouse);
     if(arm.stuck) arm.stick();
     arm.show();
   })
 
+  	counter++
 	window.requestAnimationFrame(animate);
 }
 
