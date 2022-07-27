@@ -1,0 +1,74 @@
+:root {
+	--back: #000;
+	--rest: #0f0;
+}
+
+body,
+html {
+	font-family: monospace;
+	background-color: var(--back);
+	color: var(--rest);
+}
+
+body {
+    /* height: 100%; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin: 0;
+    margin-top: 2em;
+    gap: 1em;
+}
+
+.garden {
+    display: grid;
+    grid-template-columns: 750px 200px;
+    gap: 2em;
+}
+
+button {
+    grid-column: 2;
+    grid-row: 1;
+    cursor: pointer;
+    border: 2px solid var(--rest);
+    background-color: var(--back);
+    color: var(--rest);
+    font-size: 1.2em;
+    width: 100%;
+    transform: translate(-5px, -5px);
+    box-shadow: 5px 5px var(--rest);
+    transition: 0.1s;
+}
+
+button:hover {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px #0f0;
+}
+
+.prison {
+    grid-column: 2;
+    grid-row: 2;
+	display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+	gap: 2em;
+}
+
+.cell {
+    border-top: 2px solid var(--rest);
+    padding: 0.5em;
+}
+
+.cot {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+canvas {
+    grid-column: 1;
+    grid-row: 2;
+	border: 2px solid var(--rest);
+}
