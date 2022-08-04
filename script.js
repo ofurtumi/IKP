@@ -1,7 +1,7 @@
-import Victor from './vic.js';
-import { getAnimationCoord, newInput } from './utils.js';
+import Victor from "./vic.js";
+import { getAnimationCoord, newInput } from "./utils.js";
 
-import { Arm } from './Arm.js'
+import { Arm } from "./Arm.js";
 
 let canvas;
 let ctx;
@@ -13,65 +13,146 @@ let arms = new Array();
 let mouse = { x: 0, y: 0 };
 
 window.onload = () => {
-	canvas = document.querySelector('#c');
-	ctx = canvas.getContext('2d');
+  // ! smá leyni :Z
+  if (window.location.hostname === "sjomli.is") {
+    let header = document.createElement("header");
+    let nav = document.createElement("nav");
+    let ul = document.createElement("ul");
+    let home = document.createElement("li");
+    let proj = document.createElement("li");
+    let cv = document.createElement("li");
+    let aHome = document.createElement("a");
+    aHome.setAttribute("href", "/");
+    aHome.textContent = "heim";
+    let aProj = document.createElement("a");
+    aProj.setAttribute("href", "/verkefni");
+    aProj.textContent = "verkefni";
+    let aCv = document.createElement("a");
+    aCv.setAttribute("href", "/ferilskra.pdf");
+    aCv.textContent = "ferilskrá";
+    home.appendChild(aHome);
+    proj.appendChild(aProj);
+    cv.appendChild(aCv);
+    ul.append(home, proj, cv);
+    nav.appendChild(ul);
+    header.appendChild(nav);
+    document.querySelector("body").prepend(header);
+  }
 
-	document.querySelector('button').addEventListener("click",() => newArm(20, 20))
+  canvas = document.querySelector("#c");
+  ctx = canvas.getContext("2d");
 
-	canvas.addEventListener('mousemove', (e) => {
-		mouse = getMousePos(canvas, e);
-	});
+  document
+    .querySelector("button")
+    .addEventListener("click", () => newArm(20, 20));
 
-	newArm(25, 25)
-	animate();
+  canvas.addEventListener("mousemove", (e) => {
+    mouse = getMousePos(canvas, e);
+  });
+
+  newArm(25, 25);
+  animate();
 };
 
 function animate() {
-	ctx.fillStyle = '#000';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   arms.forEach((arm) => {
-	arm.animated ? arm.follow(getAnimationCoord(arm.animStyle, counter, (canvas.width/2))) : arm.follow(mouse);
-    if(arm.stuck) arm.stick();
+    arm.animated
+      ? arm.follow(getAnimationCoord(arm.animStyle, counter, canvas.width / 2))
+      : arm.follow(mouse);
+    if (arm.stuck) arm.stick();
     arm.show();
-  })
+  });
 
-  	counter++
-	window.requestAnimationFrame(animate);
+  counter++;
+  window.requestAnimationFrame(animate);
 }
 
 function newArm(iNum, iLen) {
-	let arm = new Arm(iNum, iLen, ctx);
-	arm.animated = true;
-	let numSlider = newInput('range', 'num', iNum, (e) => {arm.num = e.target.value}, 1, 50)
-	let lenSlider = newInput('range', 'len', iLen, (e) => {arm.len = e.target.value}, 1, 100)
-	let stuckToggle = newInput('checkbox', 'stuck', '', () => {arm.stuck = !arm.stuck})
-	let xPos = newInput('range', 'x', 100, (e) => {arm.xPos = Number(e.target.value)}, 0, canvas.width)
-	let yPos = newInput('range', 'y', 100, (e) => {arm.yPos = Number(e.target.value)}, 0, canvas.height)
-	let mouseToggle = newInput('checkbox', 'follow mouse', '', () => {arm.animated = !arm.animated;console.log('arm.animated --> ', arm.animated);})
+  let arm = new Arm(iNum, iLen, ctx);
+  arm.animated = true;
+  let numSlider = newInput(
+    "range",
+    "num",
+    iNum,
+    (e) => {
+      arm.num = e.target.value;
+    },
+    1,
+    50
+  );
+  let lenSlider = newInput(
+    "range",
+    "len",
+    iLen,
+    (e) => {
+      arm.len = e.target.value;
+    },
+    1,
+    100
+  );
+  let stuckToggle = newInput("checkbox", "stuck", "", () => {
+    arm.stuck = !arm.stuck;
+  });
+  let xPos = newInput(
+    "range",
+    "x",
+    100,
+    (e) => {
+      arm.xPos = Number(e.target.value);
+    },
+    0,
+    canvas.width
+  );
+  let yPos = newInput(
+    "range",
+    "y",
+    100,
+    (e) => {
+      arm.yPos = Number(e.target.value);
+    },
+    0,
+    canvas.height
+  );
+  let mouseToggle = newInput("checkbox", "follow mouse", "", () => {
+    arm.animated = !arm.animated;
+    console.log("arm.animated --> ", arm.animated);
+  });
 
-	// * anim dropdown
-	let animDropdown = document.createElement('select')
-	animDropdown.addEventListener('change', () => {arm.animStyle = Number(animDropdown.value)})
-	let opt1 = document.createElement('option')
-	opt1.value = 1;
-	opt1.text = 'infinity'
-	let opt2 = document.createElement('option')
-	opt2.value = 2;
-	opt2.text = 'circle';
-	animDropdown.append(opt1,opt2);
+  // * anim dropdown
+  let animDropdown = document.createElement("select");
+  animDropdown.addEventListener("change", () => {
+    arm.animStyle = Number(animDropdown.value);
+  });
+  let opt1 = document.createElement("option");
+  opt1.value = 1;
+  opt1.text = "infinity";
+  let opt2 = document.createElement("option");
+  opt2.value = 2;
+  opt2.text = "circle";
+  animDropdown.append(opt1, opt2);
 
-	let div = document.createElement('div');
-	div.classList.add("cell")
-	div.append(numSlider,lenSlider,stuckToggle,xPos,yPos,mouseToggle,animDropdown)
-	document.querySelector('.prison').appendChild(div)
-	arms.push(arm)
-}	
+  let div = document.createElement("div");
+  div.classList.add("cell");
+  div.append(
+    numSlider,
+    lenSlider,
+    stuckToggle,
+    xPos,
+    yPos,
+    mouseToggle,
+    animDropdown
+  );
+  document.querySelector(".prison").appendChild(div);
+  arms.push(arm);
+}
 
 function getMousePos(canvas, evt) {
-	var rect = canvas.getBoundingClientRect();
-	return {
-		x: evt.clientX - rect.left,
-		y: evt.clientY - rect.top,
-	};
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top,
+  };
 }

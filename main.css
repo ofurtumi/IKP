@@ -10,7 +10,7 @@ html {
 	color: var(--rest);
 }
 
-body {
+.land {
     /* height: 100%; */
 	display: flex;
 	justify-content: center;
