@@ -47,7 +47,7 @@ function newArm(iNum, iLen) {
 	let stuckToggle = newInput('checkbox', 'stuck', '', () => {arm.stuck = !arm.stuck})
 	let xPos = newInput('range', 'x', 100, (e) => {arm.xPos = Number(e.target.value)}, 0, canvas.width)
 	let yPos = newInput('range', 'y', 100, (e) => {arm.yPos = Number(e.target.value)}, 0, canvas.height)
-	let mouseToggle = newInput('checkbox', 'animated', '', () => {arm.animated = !arm.animated;console.log('arm.animated --> ', arm.animated);})
+	let mouseToggle = newInput('checkbox', 'follow mouse', '', () => {arm.animated = !arm.animated;console.log('arm.animated --> ', arm.animated);})
 
 	// * anim dropdown
 	let animDropdown = document.createElement('select')
