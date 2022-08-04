@@ -42,6 +42,7 @@ function animate() {
 
 function newArm(iNum, iLen) {
 	let arm = new Arm(iNum, iLen, ctx);
+	arm.animated = true;
 	let numSlider = newInput('range', 'num', iNum, (e) => {arm.num = e.target.value}, 1, 50)
 	let lenSlider = newInput('range', 'len', iLen, (e) => {arm.len = e.target.value}, 1, 100)
 	let stuckToggle = newInput('checkbox', 'stuck', '', () => {arm.stuck = !arm.stuck})
