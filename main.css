@@ -5,6 +5,7 @@
 
 body,
 html {
+    margin: 0;
 	font-family: monospace;
 	background-color: var(--back);
 	color: var(--rest);
