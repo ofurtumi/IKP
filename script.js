@@ -14,8 +14,8 @@ let mouse = { x: 0, y: 0 };
 
 window.onload = () => {
   // ! smá leyni :Z
-  if (window.location.hostname === "www.sjomli.is") {
-    getNav();
+  if (window.location.hostname !== "www.sjomli.is") {
+    document.querySelector('header').remove();
   }
 
   canvas = document.querySelector("#c");
@@ -134,29 +134,4 @@ function getMousePos(canvas, evt) {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top,
   };
-}
-
-function getNav() {
-  let header = document.createElement("header");
-  let nav = document.createElement("nav");
-  let ul = document.createElement("ul");
-  let home = document.createElement("li");
-  let proj = document.createElement("li");
-  let cv = document.createElement("li");
-  let aHome = document.createElement("a");
-  aHome.setAttribute("href", "/");
-  aHome.textContent = "heim";
-  let aProj = document.createElement("a");
-  aProj.setAttribute("href", "/verkefni");
-  aProj.textContent = "verkefni";
-  let aCv = document.createElement("a");
-  aCv.setAttribute("href", "/ferilskra.pdf");
-  aCv.textContent = "ferilskrá";
-  home.appendChild(aHome);
-  proj.appendChild(aProj);
-  cv.appendChild(aCv);
-  ul.append(home, proj, cv);
-  nav.appendChild(ul);
-  header.appendChild(nav);
-  document.querySelector("body").prepend(header);
 }
