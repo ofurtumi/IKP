@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Test</title>
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="/global-header.css" />
+		<style>
+			li {
+				filter: invert(1);
+			}
+		</style>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="/global-header.css">
-    <style>
-        li {
-            filter: invert(1);
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/">heim</a>
-                </li>
-                <li>
-                    <a href="/um/">um mig</a>
-                </li>
-                <li>
-                    <a href="/ferilskra.pdf" target="blank">ferilskrá</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <div class="land">
-        <div class="garden">
-            <canvas width="750" height="750" id="c"></canvas>
-            <button>new arm</button>
-            <div class="prison">
-            </div>
-        </div>
-    </div>
-    <script type="module" src="script.js"></script>
-</body>
-
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">heim</a>
+					</li>
+					<li>
+						<a href="/ferilskra.pdf" target="blank">ferilskrá</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div class="land">
+			<div class="garden">
+				<canvas width="750" height="750" id="c"></canvas>
+				<button>new arm</button>
+				<div class="prison"></div>
+			</div>
+		</div>
+		<script type="module" src="script.js"></script>
+	</body>
 </html>
